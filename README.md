@@ -8,3 +8,8 @@
 
 ## 导出python依赖
 >pip freeze > requirements.txt
+
+## 代码编写规范
+
+:o 页面元素维护在 conf.py文件中
+:o xxx.png
