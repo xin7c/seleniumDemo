@@ -3,7 +3,9 @@
 
 from selenium import webdriver
 import time
-from conf import conf, getUrl
+from conf import conf
+
+
 class SeleniumDemo(object):
 	"""docstring for SeleniumDemo"""
 	def __init__(self):
@@ -15,7 +17,7 @@ class SeleniumDemo(object):
 		return self.br.find_element_by_xpath(xpath)
 
 	def action(self):
-		self.br.get(getUrl)
+		self.br.get(conf["product"]["getUrl"])
 
 		uname = self.elXpath(conf["product"]["elements"]["uname"])
 		upass = self.elXpath(conf["product"]["elements"]["upass"])
@@ -25,7 +27,7 @@ class SeleniumDemo(object):
 		uname.send_keys(conf["product"]["sendKeys"]["uname"])
 		upass.send_keys(conf["product"]["sendKeys"]["upass"])
 		loginBtn.click()
-		print self.br.title.encode('utf8')
+		print(self.br.title.encode('utf8'))
 		time.sleep(1)
 
 		# selectData
@@ -33,9 +35,14 @@ class SeleniumDemo(object):
 		selectData.click()
 		selectYesterday = self.elXpath(conf["product"]["elements"]["selectYesterday"])
 		selectYesterday.click()
-		# time.sleep(5)
-		# self.br.close()
+
+		# checkCretText
+		cretText = self.elXpath("/html/body/div/div/div/div/div[1]/div/span").text
+		print(cretText.encode('utf8'))
 		self.br.get_screenshot_as_file("xxx.png")
+
+		time.sleep(1)
+		self.br.close()
 
 if __name__ == '__main__':
 	sd = SeleniumDemo()

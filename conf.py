@@ -1,7 +1,6 @@
-getUrl = "http://devtest.adinsights.cn:9000/#/product"
-
 conf = {
 	"product": {
+		"getUrl": "http://devtest.adinsights.cn:9000/#/product",
 		"elements":{
 			"uname": "/html/body/div/div/div[1]/div[2]/ul/li[1]/input",
 			"upass": "/html/body/div/div/div[1]/div[2]/ul/li[2]/input",
@@ -15,6 +14,9 @@ conf = {
 		}
 	},
 	"admin": {
-
+		"elements":{
+			},
+		"sendKeys":{
+		}
 	}
 }
