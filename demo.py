@@ -7,8 +7,6 @@ sys.setdefaultencoding('utf-8')
 from selenium import webdriver
 import time
 from conf import conf
-
-
 class SeleniumDemo(object):
 	"""docstring for SeleniumDemo"""
 	def __init__(self):
@@ -40,20 +38,20 @@ class SeleniumDemo(object):
 		selectYesterday.click()
 
 		# checkCretText
-		cretText = self.elXpath("/html/body/div/div/div/div/div[1]/div/span").text
+		cretText = self.elXpath(conf["product"]["elements"]["cretText"]).text
 		print(cretText)
 
 		# checkProductList
-		productTable_1 = self.br.find_element_by_xpath("/html/body/div/div/div/div/div[2]/div[1]/table/tbody")
-		# productTable_2 = productTable_1.find_elements_by_xpath("/tr")
-		# /html/body/div/div/div/div/div[2]/div[1]/table/tbody/tr[1]/td[3]
-		# /html/body/div/div/div/div/div[2]/div[1]/table/tbody/tr[2]/td[3]
-		productTable_2 = productTable_1.find_elements_by_tag_name("tr")
-		print(len(productTable_2))
-		for i, j  in enumerate(productTable_2):
+		productTableGame = self.br.find_element_by_xpath(conf["product"]["elements"]["productTableGame"])
+		productTableGameTrList = productTableGame.find_elements_by_tag_name("tr")
+		print(len(productTableGameTrList))
+
+		for i, j  in enumerate(productTableGameTrList):
+			# 定位game表格的[投放计划]数值文本
 			trXpathGame = conf["product"]["elements"]["trXpathGame"] %(str(i+1))
-			print(self.elXpath(trXpathGame).text)
-			print("-" * 10)
+			if i <= 2:
+				print(i, self.elXpath(trXpathGame).text)
+				print("-" * 10)
 
 
 		self.br.get_screenshot_as_file("xxx.png")

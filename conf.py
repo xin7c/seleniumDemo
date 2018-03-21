@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 conf = {
 	"product": {
 		"getUrl": "http://devtest.adinsights.cn:9000/#/product",
@@ -7,7 +10,11 @@ conf = {
 			"loginBtn": "html/body/div/div/div[1]/div[2]/div[4]",
 			"selectDate": "/html/body/div/div/div/div/div[1]/div/span",
 			"selectYesterday": "/html/body/div/div/div/div/div[1]/div/div/div[1]/a[1]",
-			"trXpathGame": "/html/body/div/div/div/div/div[2]/div[1]/table/tbody/tr[%s]/td[3]"
+			"cretText": "/html/body/div/div/div/div/div[1]/div/span",
+			"productTableGame": "/html/body/div/div/div/div/div[2]/div[1]/table/tbody",
+			"trXpathGame": "/html/body/div/div/div/div/div[2]/div[1]/table/tbody/tr[%s]/td[3]",
+			"trXpathApp": "",
+			"trXpathBrand": ""
 		},
 		"sendKeys":{
 			"uname": "zhangliang@reyun.com",
