@@ -3,32 +3,39 @@
 
 from selenium import webdriver
 import time
+from conf import conf, getUrl
 class SeleniumDemo(object):
 	"""docstring for SeleniumDemo"""
 	def __init__(self):
 		super(SeleniumDemo, self).__init__()
 		# 驱动文件位置 D:\Python27\geckodriver.exe
-		self.browser = webdriver.Firefox()
+		self.br = webdriver.Firefox()
+
+	def elXpath(self, xpath):
+		return self.br.find_element_by_xpath(xpath)
 
 	def action(self):
-		self.browser.get('http://devtest.adinsights.cn:9000/admin/#/')
-		uname = self.browser.find_element_by_xpath("/html/body/div/div/div/div[2]/input[1]")
-		upass = self.browser.find_element_by_xpath("/html/body/div/div/div/div[2]/input[2]")
-		loginBtn = self.browser.find_element_by_xpath("/html/body/div/div/div/div[2]/div[3]")
+		self.br.get(getUrl)
+
+		uname = self.elXpath(conf["product"]["elements"]["uname"])
+		upass = self.elXpath(conf["product"]["elements"]["upass"])
+		loginBtn = self.elXpath(conf["product"]["elements"]["loginBtn"])
 
 		# login
-		uname.send_keys("zhangliang@reyun.com")
-		upass.send_keys("reyun123")
+		uname.send_keys(conf["product"]["sendKeys"]["uname"])
+		upass.send_keys(conf["product"]["sendKeys"]["upass"])
 		loginBtn.click()
-		print self.browser.title.encode('utf8')
+		print self.br.title.encode('utf8')
 		time.sleep(1)
-		# 点击第一个审核
-		auditLinkOne = self.browser.find_element_by_xpath('//*[@id="app"]/div/div/div[1]/table/tr[2]/td[6]')
-		print auditLinkOne
-		auditLinkOne.click()
 
-		time.sleep(5)
-		self.browser.close()
+		# selectData
+		selectData = self.elXpath(conf["product"]["elements"]["selectData"])
+		selectData.click()
+		selectYesterday = self.elXpath(conf["product"]["elements"]["selectYesterday"])
+		selectYesterday.click()
+		# time.sleep(5)
+		# self.br.close()
+		self.br.get_screenshot_as_file("xxx.png")
 
 if __name__ == '__main__':
 	sd = SeleniumDemo()
