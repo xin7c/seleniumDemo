@@ -6,5 +6,5 @@
 ## 驱动文件位置 
 > D:\Python27\geckodriver.exe
 
-# 导出python依赖
+## 导出python依赖
 >pip freeze > requirements.txt
