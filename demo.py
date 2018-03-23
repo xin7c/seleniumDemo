@@ -1,63 +1,67 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from selenium import webdriver
 import time
 from conf import conf
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+
 class SeleniumDemo(object):
-	"""docstring for SeleniumDemo"""
-	def __init__(self):
-		super(SeleniumDemo, self).__init__()
-		# 驱动文件位置 D:\Python27\geckodriver.exe
-		self.br = webdriver.Firefox()
+    """selenium自动化测试demo"""
 
-	def elXpath(self, xpath):
-		return self.br.find_element_by_xpath(xpath)
+    def __init__(self):
+        super(SeleniumDemo, self).__init__()
+        # 驱动文件位置 D:\Python27\geckodriver.exe
+        self.br = webdriver.Firefox()
 
-	def action(self):
-		self.br.get(conf["product"]["getUrl"])
+    def elXpath(self, xpath):
+        return self.br.find_element_by_xpath(xpath)
 
-		uname = self.elXpath(conf["product"]["elements"]["uname"])
-		upass = self.elXpath(conf["product"]["elements"]["upass"])
-		loginBtn = self.elXpath(conf["product"]["elements"]["loginBtn"])
+    def action(self):
+        self.br.get(conf["product"]["getUrl"])
 
-		# login
-		uname.send_keys(conf["product"]["sendKeys"]["uname"])
-		upass.send_keys(conf["product"]["sendKeys"]["upass"])
-		loginBtn.click()
-		print(self.br.title)
-		time.sleep(1)
+        uname = self.elXpath(conf["product"]["elements"]["uname"])
+        upass = self.elXpath(conf["product"]["elements"]["upass"])
+        loginBtn = self.elXpath(conf["product"]["elements"]["loginBtn"])
 
-		# selectData
-		selectData = self.elXpath(conf["product"]["elements"]["selectDate"])
-		selectData.click()
-		selectYesterday = self.elXpath(conf["product"]["elements"]["selectYesterday"])
-		selectYesterday.click()
+        # login
+        uname.send_keys(conf["product"]["sendKeys"]["uname"])
+        upass.send_keys(conf["product"]["sendKeys"]["upass"])
+        loginBtn.click()
+        print(self.br.title)
+        time.sleep(1)
 
-		# checkCretText
-		cretText = self.elXpath(conf["product"]["elements"]["cretText"]).text
-		print(cretText)
+        # selectData
+        selectData = self.elXpath(conf["product"]["elements"]["selectDate"])
+        selectData.click()
+        selectYesterday = self.elXpath(conf["product"]["elements"]["selectYesterday"])
+        selectYesterday.click()
 
-		# checkProductList
-		productTableGame = self.br.find_element_by_xpath(conf["product"]["elements"]["productTableGame"])
-		productTableGameTrList = productTableGame.find_elements_by_tag_name("tr")
-		print(len(productTableGameTrList))
+        # checkCretText
+        cretText = self.elXpath(conf["product"]["elements"]["cretText"]).text
+        print(cretText)
 
-		for i, j  in enumerate(productTableGameTrList):
-			# 定位game表格的[投放计划]数值文本
-			trXpathGame = conf["product"]["elements"]["trXpathGame"] %(str(i+1))
-			if i <= 2:
-				print(i, self.elXpath(trXpathGame).text)
-				print("-" * 10)
+        # checkProductList
+        productTableGame = self.br.find_element_by_xpath(conf["product"]["elements"]["productTableGame"])
+        productTableGameTrList = productTableGame.find_elements_by_tag_name("tr")
+        print(len(productTableGameTrList))
 
+        for i, j in enumerate(productTableGameTrList):
+            # 定位game表格的[投放计划]数值文本
+            trXpathGame = conf["product"]["elements"]["trXpathGame"] % (str(i + 1))
+            if i <= 2:
+                print(i, self.elXpath(trXpathGame).text)
+                print("-" * 10)
 
-		self.br.get_screenshot_as_file("xxx.png")
-		time.sleep(1)
-		self.br.close()
+        self.br.get_screenshot_as_file("xxx.png")
+        time.sleep(1)
+        self.br.close()
+
 
 if __name__ == '__main__':
-	sd = SeleniumDemo()
-	sd.action()
+    sd = SeleniumDemo()
+    sd.action()
