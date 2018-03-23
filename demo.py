@@ -22,7 +22,7 @@ class SeleniumDemo(object):
         return self.br.find_element_by_xpath(xpath)
 
     def saveScreenshot(self):
-        picName = "D:\\xcgit\\seleniumDemo\\screenShot\\" + time.strftime("%m%d%H%M", time.localtime()) + ".png"
+        picName = conf["path"]["screenShot"] + time.strftime("%m%d%H%M", time.localtime()) + ".png"
         print picName
         self.br.get_screenshot_as_file(picName)
 

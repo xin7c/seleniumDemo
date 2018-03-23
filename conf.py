@@ -26,5 +26,8 @@ conf = {
 			},
 		"sendKeys":{
 		}
+	},
+	"path":{
+		"screenShot":"D:\\xcgit\\seleniumDemo\\screenShot\\"
 	}
 }
