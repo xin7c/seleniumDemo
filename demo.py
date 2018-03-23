@@ -21,6 +21,11 @@ class SeleniumDemo(object):
     def elXpath(self, xpath):
         return self.br.find_element_by_xpath(xpath)
 
+    def saveScreenshot(self):
+        picName = "D:\\xcgit\\seleniumDemo\\screenShot\\" + time.strftime("%m%d%H%M", time.localtime()) + ".png"
+        print picName
+        self.br.get_screenshot_as_file(picName)
+
     def action(self):
         self.br.get(conf["product"]["getUrl"])
 
@@ -56,8 +61,7 @@ class SeleniumDemo(object):
             if i <= 2:
                 print(i, self.elXpath(trXpathGame).text)
                 print("-" * 10)
-
-        self.br.get_screenshot_as_file("xxx.png")
+        self.saveScreenshot()
         time.sleep(1)
         self.br.close()
 
